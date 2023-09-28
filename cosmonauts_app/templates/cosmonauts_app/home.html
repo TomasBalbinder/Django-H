@@ -1,0 +1,36 @@
+{% extends 'cosmonauts_app/base.html' %}
+
+
+
+{% block content %}
+  <h1>Seznam kosmonautů</h1>
+  <ul>
+    {% for cosmonaut in cosmonauti %}
+        <li>{{ cosmonaut.first_name }} {{ cosmonaut.last_name }} 
+            - <a href="{% url 'edit_cosmonaut' cosmonaut.pk %}">Upravit</a> 
+            - <a href="{% url 'delete_cosmonaut' cosmonaut.pk %}">Smazat</a>
+        </li>
+    {% empty %}
+      <li>Nejsou žádní kosmonauti k zobrazení.</li>
+    {% endfor %}
+  </ul>
+
+  <div class="pagination">
+    <span class="step-links">
+      {% if cosmonauti.has_previous %}
+        <a href="?page=1">&laquo; první</a>
+        <a href="?page={{ cosmonauti.previous_page_number }}">předchozí</a>
+      {% endif %}
+
+      <span class="current-page">
+        Stránka {{ cosmonauti.number }} z {{ cosmonauti.paginator.num_pages }}.
+      </span>
+
+      {% if cosmonauti.has_next %}
+        <a href="?page={{ cosmonauti.next_page_number }}">další</a>
+        <a href="?page={{ cosmonauti.paginator.num_pages }}">poslední &raquo;</a>
+      {% endif %}
+    </span>
+  </div>
+{% endblock %}
+

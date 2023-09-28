@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Kosmonauti{% endblock %}</title>
+</head>
+<body>
+    <header>
+        <h1>Kosmonauti</h1>
+    </header>
+   
+        <ul>
+            <li><a href="{% url 'shows_all_cosmonauts' %}">Domů</a></li>
+            <li><a href="{% url 'create_cosmonaut' %}">Vytvořit kosmonauta</a></li>
+            
+        </ul>
+    
+    
+    {% block content %}{% endblock %}
+    
+</body>
+</html>

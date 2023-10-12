@@ -1,0 +1,14 @@
+{% extends 'cosmonauts_app/base.html' %}
+
+
+{% block content %}
+<h2>Nahrát XML soubor</h2>
+
+<form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.as_p }}
+
+    <button type="submit">Nahrát</button>
+</form>
+<a href="{% url 'shows_all_cosmonauts' %}">Zpět na seznam kosmonautů</a>
+{% endblock %}

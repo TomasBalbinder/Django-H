@@ -1,8 +1,16 @@
 {% extends 'cosmonauts_app/base.html' %}
 
-
+{% block title %}Home{% endblock %}
 
 {% block content %}
+{% if user.is_authenticated %}
+  Hi {{ user.username }}!
+{% else %}
+  <p>You are not logged in</p>
+  <a href="{% url 'login' %}">Log In</a>
+{% endif %}
+
+
   <h1>Seznam kosmonautů</h1>
   <ul>
     {% for cosmonaut in cosmonauti %}
@@ -17,18 +25,18 @@
 
   <div class="pagination">
     <span class="step-links">
-      {% if cosmonauti.has_previous %}
+      {% if page_obj.has_previous %}
         <a href="?page=1">&laquo; první</a>
-        <a href="?page={{ cosmonauti.previous_page_number }}">předchozí</a>
+        <a href="?page={{ page_obj.previous_page_number }}">předchozí</a>
       {% endif %}
 
       <span class="current-page">
-        Stránka {{ cosmonauti.number }} z {{ cosmonauti.paginator.num_pages }}.
+        Stránka {{ page_obj.number }} z {{ page_obj.paginator.num_pages }}.
       </span>
 
-      {% if cosmonauti.has_next %}
-        <a href="?page={{ cosmonauti.next_page_number }}">další</a>
-        <a href="?page={{ cosmonauti.paginator.num_pages }}">poslední &raquo;</a>
+      {% if page_obj.has_next %}
+        <a href="?page={{ page_obj.next_page_number }}">další</a>
+        <a href="?page={{ page_obj.paginator.num_pages }}">poslední &raquo;</a>
       {% endif %}
     </span>
   </div>
